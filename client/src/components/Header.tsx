@@ -38,7 +38,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/">
           <a className="flex items-center gap-3 rtl:gap-3">
-            <img src="/logo.svg" alt="برق" className="h-10 w-auto" />
+            <img src="/logo.png" alt="برق" className="h-10 w-auto" />
             <span className="text-lg font-bold leading-tight">{language === 'ar' ? 'برق للخدمات العامة وتعقيب المعاملات الحكومية' : 'Barq for Public Services and Government Transaction Processing'}</span>
           </a>
         </Link>
