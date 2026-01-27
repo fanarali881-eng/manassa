@@ -1,4 +1,4 @@
-import { useLanguage } from '@/components/LanguageProvider';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useTranslation } from '@/lib/i18n';
 import { getBookingSettings, getBookingUrl } from '@/lib/countryCheck';
 import { useState, useEffect } from 'react';
