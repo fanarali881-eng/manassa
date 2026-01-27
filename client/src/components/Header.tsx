@@ -38,8 +38,8 @@ export default function Header() {
         {/* Logo */}
         <Link href="/">
           <a className="flex items-center space-x-2 rtl:space-x-reverse">
-            <img src="/logo.png" alt="Salamat Logo" className="h-12 w-12" />
-            <span className="text-xl font-bold">Salamat Vichel Safety inspection</span>
+            <img src="/logo.svg" alt="برق" className="h-12 w-auto" />
+            <span className="text-xl font-bold">{language === 'ar' ? 'برق للخدمات العامة' : 'Barq Public Services'}</span>
           </a>
         </Link>
 
