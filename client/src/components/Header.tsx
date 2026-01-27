@@ -37,9 +37,9 @@ export default function Header() {
       <nav className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center space-x-2 rtl:space-x-reverse">
-            <img src="/logo.svg" alt="برق" className="h-12 w-auto" />
-            <span className="text-xl font-bold">{language === 'ar' ? 'برق للخدمات العامة' : 'Barq Public Services'}</span>
+          <a className="flex items-center gap-3 rtl:gap-3">
+            <img src="/logo.svg" alt="برق" className="h-10 w-auto" />
+            <span className="text-lg font-bold leading-tight">{language === 'ar' ? 'برق للخدمات العامة وتعقيب المعاملات الحكومية' : 'Barq for Public Services and Government Transaction Processing'}</span>
           </a>
         </Link>
 
