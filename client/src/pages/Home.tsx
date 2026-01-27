@@ -9,7 +9,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useTranslation } from '@/lib/i18n';
 import { getBookingUrl, getBookingSettings } from '@/lib/countryCheck';
 import { useState, useEffect } from 'react';
-import { FileText, Calendar, CheckCircle, ClipboardCheck, MapPin, Shield, Sparkles, Stamp, Users, Zap, FileCheck, Award } from 'lucide-react';
+import { FileText, Calendar, CheckCircle, ClipboardCheck, MapPin, Shield, Sparkles, Stamp, Users, Zap, FileCheck, Award, Building2, RefreshCw, Type, Edit, FileSpreadsheet, FileBadge, RotateCw, BadgeCheck } from 'lucide-react';
 import { Link } from 'wouter';
 
 
@@ -27,51 +27,51 @@ export default function Home() {
 
   const services = [
     {
-      icon: FileText,
-      title: t('periodicInspection'),
-      description: t('periodicInspectionDesc'),
+      icon: Building2,
+      title: language === 'ar' ? 'قيد سجل تجاري' : 'Commercial Registration',
+      description: language === 'ar' ? 'إصدار سجل تجاري جديد لمؤسسة فردية' : 'Issue new commercial registration for individual establishment',
       color: 'text-blue-600',
     },
     {
-      icon: ClipboardCheck,
-      title: t('prePurchaseInspection'),
-      description: t('prePurchaseInspectionDesc'),
+      icon: RefreshCw,
+      title: language === 'ar' ? 'تجديد سجل تجاري' : 'Renew Commercial Registration',
+      description: language === 'ar' ? 'تجديد صلاحية السجل التجاري القائم' : 'Renew existing commercial registration validity',
       color: 'text-green-600',
     },
     {
-      icon: Calendar,
-      title: t('roadsideInspection'),
-      description: t('roadsideInspectionDesc'),
+      icon: Type,
+      title: language === 'ar' ? 'حجز اسم تجاري' : 'Reserve Trade Name',
+      description: language === 'ar' ? 'حجز اسم تجاري جديد قبل إصدار السجل' : 'Reserve new trade name before registration',
       color: 'text-purple-600',
     },
     {
-      icon: FileCheck,
-      title: t('roadsideAssistance'),
-      description: language === 'ar' ? 'استخراج شهادة ولادة بسرعة وكفاءة' : 'Fast and efficient birth certificate extraction',
-      color: 'text-red-600',
+      icon: Edit,
+      title: language === 'ar' ? 'تعديل سجل تجاري' : 'Modify Commercial Registration',
+      description: language === 'ar' ? 'تعديل بيانات السجل التجاري الحالي' : 'Modify current commercial registration data',
+      color: 'text-orange-600',
     },
     {
-      icon: Stamp,
-      title: t('vehicleTowing'),
-      description: language === 'ar' ? 'تصديقات رسمية لجميع أنواع الوثائق' : 'Official certifications for all document types',
-      color: 'text-yellow-600',
-    },
-    {
-      icon: FileText,
-      title: t('onSiteRepair'),
-      description: language === 'ar' ? 'استخراج جميع أنواع الوثائق الرسمية' : 'Extraction of all official documents',
+      icon: FileSpreadsheet,
+      title: language === 'ar' ? 'مستخرج سجل تجاري / الإفادة التجارية' : 'Commercial Registration Extract',
+      description: language === 'ar' ? 'الحصول على مستخرج رسمي لبيانات السجل التجاري' : 'Get official extract of commercial registration data',
       color: 'text-cyan-600',
     },
     {
-      icon: Award,
-      title: t('garageRepair'),
-      description: language === 'ar' ? 'خدمات الأحوال المدنية الشاملة' : 'Comprehensive civil affairs services',
+      icon: FileBadge,
+      title: language === 'ar' ? 'إصدار رخصة تجارية' : 'Issue Commercial License',
+      description: language === 'ar' ? 'إصدار رخصة لمزاولة النشاط التجاري' : 'Issue license for commercial activity',
       color: 'text-indigo-600',
     },
     {
-      icon: Zap,
-      title: t('technicalInspection'),
-      description: language === 'ar' ? 'خدمات الجوازات السريعة والمتكاملة' : 'Fast and complete passport services',
+      icon: RotateCw,
+      title: language === 'ar' ? 'تجديد رخصة تجارية' : 'Renew Commercial License',
+      description: language === 'ar' ? 'تجديد صلاحية الرخصة التجارية المنتهية' : 'Renew expired commercial license validity',
+      color: 'text-teal-600',
+    },
+    {
+      icon: BadgeCheck,
+      title: language === 'ar' ? 'تسجيل علامة تجارية' : 'Register Trademark',
+      description: language === 'ar' ? 'تسجيل وحماية العلامة التجارية الخاصة بك' : 'Register and protect your trademark',
       color: 'text-rose-600',
     },
   ];
@@ -152,12 +152,14 @@ export default function Home() {
                   {bookingUrl ? (
                     <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
                       <Button size="lg" className="w-full sm:w-auto">
+                        <Calendar className="mr-2 h-5 w-5" />
                         {t('bookNow')}
                       </Button>
                     </a>
                   ) : (
-                    <Link href="/book">
+                    <Link href="/booking">
                       <Button size="lg" className="w-full sm:w-auto">
+                        <Calendar className="mr-2 h-5 w-5" />
                         {t('bookNow')}
                       </Button>
                     </Link>
@@ -165,48 +167,55 @@ export default function Home() {
                 </div>
               </div>
               <div className="relative">
-                <img
-                  src="/images/barq-logo.png"
-                  alt="Barq Government Services"
-                  className="w-full h-auto object-contain max-w-md mx-auto"
-                />
+                <div className="aspect-square rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <Sparkles className="h-32 w-32 text-primary" />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="py-12 bg-primary text-primary-foreground">
+        {/* Payment Policy Banner */}
+        <section className="py-8 bg-primary/5 border-y">
           <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              {stats.map((stat, index) => (
-                <div key={index}>
-                  <div className="text-4xl md:text-5xl font-bold mb-2">{stat.value}</div>
-                  <div className="text-lg opacity-90">{stat.label}</div>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div className="flex flex-col items-center">
+                <CheckCircle className="h-8 w-8 text-green-600 mb-2" />
+                <span className="font-semibold">{t('freeBooking')}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <CheckCircle className="h-8 w-8 text-green-600 mb-2" />
+                <span className="font-semibold">{t('freeCancellation')}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <CheckCircle className="h-8 w-8 text-green-600 mb-2" />
+                <span className="font-semibold">{t('payAfterService')}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <CheckCircle className="h-8 w-8 text-green-600 mb-2" />
+                <span className="font-semibold">{t('qualityGuarantee')}</span>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20">
+        <section className="py-20">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('servicesTitle')}</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 {language === 'ar' 
-                  ? 'نقدم مجموعة شاملة من خدمات تعقيب المعاملات الحكومية بكل احترافية وسرعة'
-                  : 'We provide a comprehensive range of government transaction services with professionalism and speed'
-                }
+                  ? 'نقدم مجموعة شاملة من خدمات السجل التجاري والتراخيص'
+                  : 'We offer a comprehensive range of commercial registration and licensing services'}
               </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {services.map((service, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <service.icon className={`h-12 w-12 ${service.color} mb-4`} />
-                    <CardTitle>{service.title}</CardTitle>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-base">{service.description}</CardDescription>
@@ -217,52 +226,57 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
-        <section id="about" className="py-20 bg-muted/50">
+        {/* Why Choose Us */}
+        <section className="py-20 bg-muted/30">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('whyTitle')}</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {language === 'ar' 
-                  ? 'نتميز بالسرعة والاحترافية في إنجاز معاملاتك الحكومية'
-                  : 'We excel in speed and professionalism in completing your government transactions'
-                }
-              </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
                 <div key={index} className="text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
                     <feature.icon className="h-8 w-8 text-primary" />
                   </div>
-                  <h3 className="font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
+                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* How It Works Section */}
+        {/* Stats Section */}
         <section className="py-20">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('howItWorksTitle')}</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {language === 'ar' 
-                  ? 'خطوات بسيطة لإنجاز معاملتك'
-                  : 'Simple steps to complete your transaction'
-                }
-              </p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('statsTitle')}</h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {steps.map((step, index) => (
+            <div className="grid grid-cols-3 gap-8">
+              {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground text-2xl font-bold mb-4">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section className="py-20 bg-muted/30">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('howItWorksTitle')}</h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {steps.map((step, index) => (
+                <div key={index} className="relative text-center">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4">
                     {step.number}
                   </div>
-                  <h3 className="font-semibold mb-2">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground">{step.description}</p>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -270,30 +284,26 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-primary/10 to-primary/5">
+        <section className="py-20">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {language === 'ar' 
-                  ? 'جاهز لإنجاز معاملتك؟'
-                  : 'Ready to complete your transaction?'
-                }
+            <div className="bg-primary rounded-2xl p-8 md:p-12 text-center text-primary-foreground">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                {language === 'ar' ? 'جاهز لإنجاز معاملتك؟' : 'Ready to Complete Your Transaction?'}
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-lg mb-8 opacity-90">
                 {language === 'ar' 
-                  ? 'قدم طلبك الآن ودع فريقنا المحترف يتولى الأمر'
-                  : 'Submit your request now and let our professional team handle it'
-                }
+                  ? 'تواصل معنا الآن وسنساعدك في إنجاز معاملتك بسرعة واحترافية'
+                  : 'Contact us now and we will help you complete your transaction quickly and professionally'}
               </p>
               {bookingUrl ? (
                 <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg">
+                  <Button size="lg" variant="secondary">
                     {t('bookNow')}
                   </Button>
                 </a>
               ) : (
-                <Link href="/book">
-                  <Button size="lg">
+                <Link href="/booking">
+                  <Button size="lg" variant="secondary">
                     {t('bookNow')}
                   </Button>
                 </Link>
@@ -302,7 +312,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );
