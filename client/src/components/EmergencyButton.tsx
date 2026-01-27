@@ -2,7 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useTranslation } from '@/lib/i18n';
 import { Phone } from 'lucide-react';
 
-const EMERGENCY_PHONE = '00966541331452';
+const EMERGENCY_PHONE = '00966566704414';
 
 export default function EmergencyButton() {
   const { language } = useLanguage();

@@ -36,7 +36,7 @@ export default function CookiePolicy() {
       },
       {
         title: 'اتصل بنا',
-        content: 'إذا كان لديك أي أسئلة حول سياسة ملفات تعريف الارتباط، يرجى الاتصال بنا على: info@salamat.sa',
+        content: 'إذا كان لديك أي أسئلة حول سياسة ملفات تعريف الارتباط، يرجى الاتصال بنا على: info@barq.sa',
       },
     ],
   } : {
@@ -69,7 +69,7 @@ export default function CookiePolicy() {
       },
       {
         title: 'Contact Us',
-        content: 'If you have any questions about this Cookie Policy, please contact us at: info@salamat.sa',
+        content: 'If you have any questions about this Cookie Policy, please contact us at: info@barq.sa',
       },
     ],
   };

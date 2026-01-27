@@ -84,7 +84,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <a href="tel:00966541331452" className="hover:text-primary transition-colors" dir="ltr">00966-541331452</a>
+                <a href="tel:00966566704414" className="hover:text-primary transition-colors" dir="ltr">00966-566704414</a>
               </li>
               <li className="flex items-center gap-2 text-primary font-semibold">
                 <span>⚡</span>
@@ -92,7 +92,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>info@salamat.sa</span>
+                <span>info@barq.sa</span>
               </li>
               <li className="flex items-start gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-1 shrink-0" />

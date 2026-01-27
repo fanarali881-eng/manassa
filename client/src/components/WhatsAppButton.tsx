@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { MessageCircle } from 'lucide-react';
 
-const PHONE_NUMBER = '00966541331452';
+const PHONE_NUMBER = '00966566704414';
 
 export default function WhatsAppButton() {
   const { language } = useLanguage();
