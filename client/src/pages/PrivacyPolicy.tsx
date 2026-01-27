@@ -16,11 +16,11 @@ export default function PrivacyPolicy() {
       },
       {
         title: 'المعلومات التي نجمعها',
-        content: 'نقوم بجمع المعلومات التالية: الاسم الكامل، البريد الإلكتروني، رقم الهاتف، معلومات المركبة (الصانع، الموديل، السنة، رقم اللوحة)، تاريخ ووقت الموعد المفضل، الموقع.',
+        content: 'نقوم بجمع المعلومات التالية: الاسم الكامل، البريد الإلكتروني، رقم الهاتف، نوع المعاملة المطلوبة، المستندات اللازمة، تاريخ ووقت الموعد المفضل، الموقع.',
       },
       {
         title: 'كيفية استخدام المعلومات',
-        content: 'نستخدم معلوماتك لـ: معالجة حجوزات الفحص، التواصل معك بشأن مواعيدك، إرسال رموز التحقق عبر البريد الإلكتروني، تحسين خدماتنا، الامتثال للمتطلبات القانونية.',
+        content: 'نستخدم معلوماتك لـ: معالجة طلبات تعقيب المعاملات، التواصل معك بشأن معاملاتك، إرسال رموز التحقق عبر البريد الإلكتروني، تحسين خدماتنا، الامتثال للمتطلبات القانونية.',
       },
       {
         title: 'حماية المعلومات',
@@ -57,11 +57,11 @@ export default function PrivacyPolicy() {
       },
       {
         title: 'Information We Collect',
-        content: 'We collect the following information: Full name, Email address, Phone number, Vehicle information (make, model, year, plate number), Preferred appointment date and time, Location.',
+        content: 'We collect the following information: Full name, Email address, Phone number, Type of transaction required, Required documents, Preferred appointment date and time, Location.',
       },
       {
         title: 'How We Use Your Information',
-        content: 'We use your information to: Process inspection bookings, Communicate with you about your appointments, Send verification codes via email, Improve our services, Comply with legal requirements.',
+        content: 'We use your information to: Process government transaction requests, Communicate with you about your transactions, Send verification codes via email, Improve our services, Comply with legal requirements.',
       },
       {
         title: 'Information Protection',
