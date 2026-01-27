@@ -16,14 +16,7 @@ import { Link } from 'wouter';
 export default function Home() {
   const { language } = useLanguage();
   const { t } = useTranslation(language);
-  const [bookingUrl, setBookingUrl] = useState('');
-
-  useEffect(() => {
-    // Fetch booking settings from Firestore and determine URL
-    getBookingSettings().then(({ url, countries }) => {
-      getBookingUrl(url, countries).then(setBookingUrl);
-    });
-  }, []);
+  
 
   // Old services (government services)
   const oldServices = [
@@ -205,21 +198,12 @@ export default function Home() {
                   {t('heroSubtitle')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  {bookingUrl ? (
-                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                      <Button size="lg" className="w-full sm:w-auto">
-                        <Calendar className="mr-2 h-5 w-5" />
-                        {t('bookNow')}
-                      </Button>
-                    </a>
-                  ) : (
-                    <Link href="/booking">
+                  <Link href="/booking">
                       <Button size="lg" className="w-full sm:w-auto">
                         <Calendar className="mr-2 h-5 w-5" />
                         {t('bookNow')}
                       </Button>
                     </Link>
-                  )}
                 </div>
               </div>
               <div className="relative">
@@ -351,19 +335,11 @@ export default function Home() {
                   ? 'تواصل معنا الآن وسنساعدك في إنجاز معاملتك بسرعة واحترافية'
                   : 'Contact us now and we will help you complete your transaction quickly and professionally'}
               </p>
-              {bookingUrl ? (
-                <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" variant="secondary">
-                    {t('bookNow')}
-                  </Button>
-                </a>
-              ) : (
-                <Link href="/booking">
+              <Link href="/booking">
                   <Button size="lg" variant="secondary">
                     {t('bookNow')}
                   </Button>
                 </Link>
-              )}
             </div>
           </div>
         </section>
