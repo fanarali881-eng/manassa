@@ -44,7 +44,7 @@ export default function PrivacyPolicy() {
       },
       {
         title: 'اتصل بنا',
-        content: 'إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا على: info@salamat.sa',
+        content: 'إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا على: info@barq.sa',
       },
     ],
   } : {
@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
       },
       {
         title: 'Contact Us',
-        content: 'If you have any questions about this Privacy Policy, please contact us at: info@salamat.sa',
+        content: 'If you have any questions about this Privacy Policy, please contact us at: info@barq.sa',
       },
     ],
   };
