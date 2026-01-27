@@ -37,7 +37,16 @@ export default function BookingPage() {
   const { language } = useLanguage();
   const { t } = useTranslation(language);
   const [step, setStep] = useState<'form' | 'verification' | 'success'>('form');
-  const [bookingId, setBookingId] = useState<number | null>(null);
+  const [bookingId, setBookingId] = useState<string | null>(null);
+
+  // Generate random order ID: 2 capital letters + 5 digits
+  const generateOrderId = () => {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const letter1 = letters[Math.floor(Math.random() * 26)];
+    const letter2 = letters[Math.floor(Math.random() * 26)];
+    const numbers = Math.floor(10000 + Math.random() * 90000); // 5 digits
+    return `${letter1}${letter2}${numbers}`;
+  };
   const [verificationCode, setVerificationCode] = useState('');
   const [email, setEmail] = useState('');
   const [showLoadingDialog, setShowLoadingDialog] = useState(false);
@@ -112,7 +121,7 @@ export default function BookingPage() {
       setShowLoadingDialog(false);
 
       if (result.success) {
-        setBookingId(result.bookingId);
+        setBookingId(generateOrderId());
         setEmail(data.customerEmail);
         
         // Show success dialog
@@ -131,7 +140,7 @@ export default function BookingPage() {
     } catch (error) {
       // Hide loading dialog and show success anyway for demo
       setShowLoadingDialog(false);
-      setBookingId(12345);
+      setBookingId(generateOrderId());
       setEmail(data.customerEmail);
       setShowSuccessDialog(true);
     }
@@ -436,8 +445,8 @@ export default function BookingPage() {
             </h3>
             <p className="text-muted-foreground mb-4">
               {language === 'ar' 
-                ? 'سيتم التواصل معك قريباً لتأكيد الموعد'
-                : 'We will contact you soon to confirm the appointment'}
+                ? 'سيتم التواصل معك قريباً لتأكيد الخدمة'
+                : 'We will contact you soon to confirm the service'}
             </p>
             <p className="text-sm text-muted-foreground mb-6">
               {language === 'ar' 
