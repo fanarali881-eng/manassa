@@ -17,15 +17,14 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 const bookingSchema = z.object({
-  serviceType: z.enum(['periodic', 'pre_purchase', 'roadside', 'roadside_assistance', 'vehicle_towing', 'on_site_repair', 'garage_repair', 'technical_inspection']),
+  serviceType: z.string().min(1, 'Service type is required'),
   customerName: z.string().min(2, 'Name must be at least 2 characters'),
   customerEmail: z.string().email('Invalid email address'),
   customerPhone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  vehicleMake: z.string().min(2, 'Make is required'),
-  vehicleModel: z.string().min(2, 'Model is required'),
-  vehicleYear: z.number().min(1900).max(new Date().getFullYear() + 1),
-  vehiclePlateNumber: z.string().optional(),
-  vehicleVIN: z.string().optional(),
+  documentNumber: z.string().optional(),
+  issueDate: z.string().optional(),
+  idNumber: z.string().optional(),
+  civilRegistryNumber: z.string().optional(),
   preferredDate: z.string(),
   preferredTime: z.string(),
   location: z.string().optional(),
@@ -61,18 +60,33 @@ export default function BookingPage() {
 
   const serviceType = watch('serviceType');
 
+  // All services from homepage
+  const allServices = [
+    // Commercial registry services
+    { value: 'commercial_registration', ar: 'قيد سجل تجاري', en: 'Commercial Registration' },
+    { value: 'renew_commercial_registration', ar: 'تجديد سجل تجاري', en: 'Renew Commercial Registration' },
+    { value: 'reserve_trade_name', ar: 'حجز اسم تجاري', en: 'Reserve Trade Name' },
+    { value: 'modify_commercial_registration', ar: 'تعديل سجل تجاري', en: 'Modify Commercial Registration' },
+    { value: 'commercial_extract', ar: 'مستخرج سجل تجاري / الإفادة التجارية', en: 'Commercial Registration Extract' },
+    { value: 'issue_commercial_license', ar: 'إصدار رخصة تجارية', en: 'Issue Commercial License' },
+    { value: 'renew_commercial_license', ar: 'تجديد رخصة تجارية', en: 'Renew Commercial License' },
+    { value: 'register_trademark', ar: 'تسجيل علامة تجارية', en: 'Register Trademark' },
+    // Government services
+    { value: 'passport_renewal', ar: 'تجديد جواز السفر', en: 'Passport Renewal' },
+    { value: 'id_renewal', ar: 'تجديد الهوية', en: 'ID Renewal' },
+    { value: 'license_renewal', ar: 'تجديد الرخصة', en: 'License Renewal' },
+    { value: 'birth_certificate', ar: 'استخراج شهادة ولادة', en: 'Birth Certificate' },
+    { value: 'official_certifications', ar: 'تصديقات رسمية', en: 'Official Certifications' },
+    { value: 'document_extraction', ar: 'استخراج وثائق', en: 'Document Extraction' },
+    { value: 'civil_affairs', ar: 'خدمات الأحوال المدنية', en: 'Civil Affairs Services' },
+    { value: 'passport_services', ar: 'خدمات الجوازات', en: 'Passport Services' },
+    // Other
+    { value: 'other', ar: 'أخرى', en: 'Other' },
+  ];
+
   const getServiceTypeName = (type: string) => {
-    const serviceNames: Record<string, { ar: string; en: string }> = {
-      periodic: { ar: 'فحص دوري', en: 'Periodic Inspection' },
-      pre_purchase: { ar: 'فحص قبل الشراء', en: 'Pre-Purchase Inspection' },
-      roadside: { ar: 'فحص على الطريق', en: 'Roadside Inspection' },
-      roadside_assistance: { ar: 'مساعدة على الطريق', en: 'Roadside Assistance' },
-      vehicle_towing: { ar: 'سحب المركبة', en: 'Vehicle Towing' },
-      on_site_repair: { ar: 'إصلاح في الموقع', en: 'On-Site Repair' },
-      garage_repair: { ar: 'إصلاح في الكراج', en: 'Garage Repair' },
-      technical_inspection: { ar: 'فحص فني', en: 'Technical Inspection' },
-    };
-    return language === 'ar' ? serviceNames[type]?.ar : serviceNames[type]?.en;
+    const service = allServices.find(s => s.value === type);
+    return language === 'ar' ? service?.ar : service?.en;
   };
 
   const onSubmit = async (data: BookingFormData) => {
@@ -85,7 +99,10 @@ export default function BookingPage() {
     try {
       const result = await createBookingMutation.mutateAsync({
         ...data,
-        vehicleYear: Number(data.vehicleYear),
+        serviceType: data.serviceType as any,
+        vehicleMake: 'N/A',
+        vehicleModel: 'N/A',
+        vehicleYear: 2024,
         preferredDate: new Date(data.preferredDate),
         emailVerified: false,
         language,
@@ -204,8 +221,8 @@ export default function BookingPage() {
               <CardContent className="text-center">
                 <p className="text-sm text-muted-foreground mb-6">
                   {language === 'ar' 
-                    ? `رقم الحجز: ${bookingId}`
-                    : `Booking ID: ${bookingId}`}
+                    ? `رقم الطلب: ${bookingId}`
+                    : `Request ID: ${bookingId}`}
                 </p>
                 <Button onClick={() => window.location.href = '/'}>
                   {t('home')}
@@ -277,26 +294,23 @@ export default function BookingPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">{t('bookingTitle')}</CardTitle>
-              <CardDescription>{language === 'ar' ? 'املأ النموذج أدناه لحجز موعد الفحص' : 'Fill out the form below to book an inspection appointment'}</CardDescription>
+              <CardDescription>{language === 'ar' ? 'املأ النموذج أدناه لتقديم طلب الخدمة' : 'Fill out the form below to submit a service request'}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* Service Type */}
                 <div className="space-y-2">
                   <Label htmlFor="serviceType">{t('serviceType')} *</Label>
-                  <Select onValueChange={(value) => setValue('serviceType', value as any)} value={serviceType}>
+                  <Select onValueChange={(value) => setValue('serviceType', value)} value={serviceType}>
                     <SelectTrigger>
-                      <SelectValue placeholder={t('selectService')} />
+                      <SelectValue placeholder={language === 'ar' ? 'اختر نوع الخدمة' : 'Select service type'} />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="periodic">{t('periodicInspection')}</SelectItem>
-                      <SelectItem value="pre_purchase">{t('prePurchaseInspection')}</SelectItem>
-                      <SelectItem value="roadside">{t('roadsideInspection')}</SelectItem>
-                      <SelectItem value="roadside_assistance">{t('roadsideAssistance')}</SelectItem>
-                      <SelectItem value="vehicle_towing">{t('vehicleTowing')}</SelectItem>
-                      <SelectItem value="on_site_repair">{t('onSiteRepair')}</SelectItem>
-                      <SelectItem value="garage_repair">{t('garageRepair')}</SelectItem>
-                      <SelectItem value="technical_inspection">{t('technicalInspection')}</SelectItem>
+                    <SelectContent className="text-right">
+                      {allServices.map((service) => (
+                        <SelectItem key={service.value} value={service.value} className="text-right">
+                          {language === 'ar' ? service.ar : service.en}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   {errors.serviceType && <p className="text-sm text-destructive">{errors.serviceType.message}</p>}
@@ -324,34 +338,27 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                {/* Vehicle Information */}
+                {/* Document Information */}
                 <div className="space-y-4">
-                  <h3 className="font-semibold">{t('vehicleInfo')}</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <h3 className="font-semibold">{language === 'ar' ? 'معلومات الوثيقة' : 'Document Information'}</h3>
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="vehicleMake">{t('vehicleMake')} *</Label>
-                      <Input id="vehicleMake" {...register('vehicleMake')} />
-                      {errors.vehicleMake && <p className="text-sm text-destructive">{errors.vehicleMake.message}</p>}
+                      <Label htmlFor="documentNumber">{language === 'ar' ? 'رقم الوثيقة' : 'Document Number'} *</Label>
+                      <Input id="documentNumber" {...register('documentNumber')} />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="vehicleModel">{t('vehicleModel')} *</Label>
-                      <Input id="vehicleModel" {...register('vehicleModel')} />
-                      {errors.vehicleModel && <p className="text-sm text-destructive">{errors.vehicleModel.message}</p>}
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="vehicleYear">{t('vehicleYear')} *</Label>
-                      <Input id="vehicleYear" type="number" {...register('vehicleYear', { valueAsNumber: true })} />
-                      {errors.vehicleYear && <p className="text-sm text-destructive">{errors.vehicleYear.message}</p>}
+                      <Label htmlFor="issueDate">{language === 'ar' ? 'تاريخ الإصدار' : 'Issue Date'} *</Label>
+                      <Input id="issueDate" type="date" {...register('issueDate')} />
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="vehiclePlateNumber">{t('plateNumber')} ({t('optional')})</Label>
-                      <Input id="vehiclePlateNumber" {...register('vehiclePlateNumber')} />
+                      <Label htmlFor="idNumber">{language === 'ar' ? 'رقم الهوية (اختياري)' : 'ID Number (Optional)'}</Label>
+                      <Input id="idNumber" {...register('idNumber')} />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="vehicleVIN">{t('vinNumber')} ({t('optional')})</Label>
-                      <Input id="vehicleVIN" {...register('vehicleVIN')} />
+                      <Label htmlFor="civilRegistryNumber">{language === 'ar' ? 'رقم السجل المدني (اختياري)' : 'Civil Registry Number (Optional)'}</Label>
+                      <Input id="civilRegistryNumber" {...register('civilRegistryNumber')} />
                     </div>
                   </div>
                 </div>
@@ -399,73 +406,46 @@ export default function BookingPage() {
             <div className="mx-auto w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-6">
               <Loader2 className="w-10 h-10 text-green-600 dark:text-green-400 animate-spin" />
             </div>
-            <h2 className="text-xl font-semibold">
-              {language === 'ar' ? 'جاري الحجز...' : 'Booking...'}
-            </h2>
+            <h3 className="text-xl font-semibold mb-2">
+              {language === 'ar' ? 'جاري معالجة طلبك...' : 'Processing your request...'}
+            </h3>
+            <p className="text-muted-foreground">
+              {language === 'ar' ? 'يرجى الانتظار قليلاً' : 'Please wait a moment'}
+            </p>
           </div>
         </div>
       )}
 
       {/* Success Dialog */}
-      {showSuccessDialog && bookingData && (
+      {showSuccessDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full mx-4 relative">
-            <button
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full mx-4 text-center relative">
+            <button 
               onClick={handleCloseSuccessDialog}
-              className="absolute top-4 end-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
             >
               <X className="w-6 h-6" />
             </button>
-            
-            <div className="text-center mb-6">
-              <div className="mx-auto w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h2 className="text-xl font-semibold mb-6">
-                {language === 'ar' ? 'تم حجز الموعد بنجاح' : 'Booking Successful'}
-              </h2>
+            <div className="mx-auto w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-
-            <div className="space-y-3 text-center mb-6">
-              <p className="text-base">
-                <span className="text-gray-600 dark:text-gray-400">
-                  {language === 'ar' ? 'اسم العميل: ' : 'Customer Name: '}
-                </span>
-                <span className="font-medium">{bookingData.customerName}</span>
-              </p>
-              <p className="text-base">
-                <span className="text-gray-600 dark:text-gray-400">
-                  {language === 'ar' ? 'التاريخ: ' : 'Date: '}
-                </span>
-                <span className="font-medium">{bookingData.preferredDate}</span>
-              </p>
-              <p className="text-base">
-                <span className="text-gray-600 dark:text-gray-400">
-                  {language === 'ar' ? 'الوقت: ' : 'Time: '}
-                </span>
-                <span className="font-medium">{bookingData.preferredTime}</span>
-              </p>
-              <p className="text-base">
-                <span className="text-gray-600 dark:text-gray-400">
-                  {language === 'ar' ? 'نوع الخدمة: ' : 'Service Type: '}
-                </span>
-                <span className="font-medium">{getServiceTypeName(bookingData.serviceType)}</span>
-              </p>
-            </div>
-
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-6">
-              <p className="text-sm text-red-700 dark:text-red-400 text-center font-medium">
-                {language === 'ar' ? 'يرجى الالتزام بالموعد المحدد تجنباً للانتظار' : 'Please adhere to the scheduled appointment to avoid waiting'}
-              </p>
-            </div>
-
-            <Button 
-              onClick={handleCloseSuccessDialog}
-              className="w-full bg-green-600 hover:bg-green-700 text-white"
-            >
-              {language === 'ar' ? 'إغلاق' : 'Close'}
+            <h3 className="text-xl font-semibold mb-2">
+              {language === 'ar' ? 'تم استلام طلبك بنجاح!' : 'Your request has been received!'}
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              {language === 'ar' 
+                ? 'سيتم التواصل معك قريباً لتأكيد الموعد'
+                : 'We will contact you soon to confirm the appointment'}
+            </p>
+            <p className="text-sm text-muted-foreground mb-6">
+              {language === 'ar' 
+                ? `رقم الطلب: ${bookingId}`
+                : `Request ID: ${bookingId}`}
+            </p>
+            <Button onClick={handleCloseSuccessDialog} className="w-full">
+              {language === 'ar' ? 'العودة للصفحة الرئيسية' : 'Return to Home'}
             </Button>
           </div>
         </div>
