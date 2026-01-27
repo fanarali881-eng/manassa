@@ -96,7 +96,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-1 shrink-0" />
-                <span>{language === 'ar' ? 'الرياض - العليا - 12221، المملكة العربية السعودية' : 'Riyadh - Al Olaya - 12221, Saudi Arabia'}</span>
+                <span>{language === 'ar' ? 'الرياض - الدرعية - 11922، المملكة العربية السعودية' : 'Riyadh - Al Diriyah - 11922, Saudi Arabia'}</span>
               </li>
             </ul>
           </div>
