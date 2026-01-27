@@ -1,0 +1,1 @@
+ALTER TABLE `bookings` MODIFY COLUMN `serviceType` enum('periodic','pre_purchase','roadside','roadside_assistance','vehicle_towing','on_site_repair','garage_repair','technical_inspection') NOT NULL;
