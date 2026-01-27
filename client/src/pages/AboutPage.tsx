@@ -97,8 +97,8 @@ export default function AboutPage() {
                 </div>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {language === 'ar'
-                    ? 'أن نكون الخيار الأول والأكثر موثوقية في مجال فحص سلامة المركبات في المملكة العربية السعودية ودول الخليج، من خلال تقديم خدمات عالية الجودة تساهم في تحقيق رؤية المملكة 2030 للسلامة المرورية.'
-                    : 'To be the first and most reliable choice in vehicle safety inspection in Saudi Arabia and the Gulf countries, by providing high-quality services that contribute to achieving the Kingdom\'s Vision 2030 for road safety.'}
+                    ? 'أن نكون الخيار الأول والأكثر موثوقية في مجال تعقيب المعاملات الحكومية في المملكة العربية السعودية ودول الخليج، من خلال تقديم خدمات عالية الجودة تساهم في تحقيق رؤية المملكة 2030 للتحول الرقمي وتسهيل الخدمات الحكومية.'
+                    : 'To be the first and most reliable choice in government transaction processing in Saudi Arabia and the Gulf countries, by providing high-quality services that contribute to achieving the Kingdom\'s Vision 2030 for digital transformation and facilitating government services.'}
                 </p>
               </div>
 
@@ -113,8 +113,8 @@ export default function AboutPage() {
                 </div>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {language === 'ar'
-                    ? 'تقديم خدمات فحص فني شامل ودقيق للمركبات باستخدام أحدث التقنيات والمعدات، مع فريق من المهندسين والفنيين المؤهلين، لضمان سلامة المركبات على الطرق والمساهمة في الحد من الحوادث المرورية وحماية البيئة.'
-                    : 'Providing comprehensive and accurate technical inspection services for vehicles using the latest technologies and equipment, with a team of qualified engineers and technicians, to ensure vehicle safety on roads and contribute to reducing traffic accidents and protecting the environment.'}
+                    ? 'تقديم خدمات تعقيب شاملة ودقيقة للمعاملات الحكومية باستخدام أحدث التقنيات والمعدات، مع فريق من المعقبين والفنيين المؤهلين، لضمان إنجاز معاملاتك بسرعة وكفاءة، وتوفير الوقت والجهد عليك.'
+                    : 'Providing comprehensive and accurate government transaction processing services using the latest technologies and tools, with a team of qualified processors and professionals, to ensure your transactions are completed quickly and efficiently, saving you time and effort.'}
                 </p>
               </div>
             </div>
