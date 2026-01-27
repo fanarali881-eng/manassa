@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
     sections: [
       {
         title: 'المقدمة',
-        content: 'نحن في سلامات نلتزم بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام خدماتنا.',
+        content: 'نحن في برق نلتزم بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام خدماتنا.',
       },
       {
         title: 'المعلومات التي نجمعها',
@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
     sections: [
       {
         title: 'Introduction',
-        content: 'At Salamat, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use our services.',
+        content: 'At Barq, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use our services.',
       },
       {
         title: 'Information We Collect',

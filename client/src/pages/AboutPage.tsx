@@ -57,8 +57,8 @@ export default function AboutPage() {
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {language === 'ar'
-                  ? 'سلامات هي الشركة الرائدة في مجال فحص سلامة المركبات في المملكة العربية السعودية. نعمل منذ أكثر من 15 عاماً على رفع مستوى السلامة المرورية من خلال تقديم خدمات فحص فني شامل ومتخصص.'
-                  : 'Salamat is the leading company in vehicle safety inspection in Saudi Arabia. For over 15 years, we have been working to raise road safety standards through comprehensive and specialized technical inspection services.'}
+                  ? 'برق هي الشركة الرائدة في مجال تعقيب المعاملات الحكومية في المملكة العربية السعودية. نعمل منذ أكثر من 15 عاماً على رفع مستوى الخدمات العامة من خلال تقديم خدمات تعقيب شاملة ومتخصصة.'
+                  : 'Barq is the leading company in government transaction processing in Saudi Arabia. For over 15 years, we have been working to raise public service standards through comprehensive and specialized processing services.'}
               </p>
             </div>
           </div>
