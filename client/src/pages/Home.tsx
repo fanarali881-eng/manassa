@@ -25,7 +25,60 @@ export default function Home() {
     });
   }, []);
 
-  const services = [
+  // Old services (government services)
+  const oldServices = [
+    {
+      icon: FileText,
+      title: language === 'ar' ? 'تجديد جواز السفر' : 'Passport Renewal',
+      description: language === 'ar' ? 'خدمة تجديد جواز السفر بكل سهولة ويسر' : 'Easy and convenient passport renewal service',
+      color: 'text-blue-600',
+    },
+    {
+      icon: ClipboardCheck,
+      title: language === 'ar' ? 'تجديد الهوية' : 'ID Renewal',
+      description: language === 'ar' ? 'خدمة تجديد الهوية الوطنية بسرعة وكفاءة' : 'Fast and efficient national ID renewal service',
+      color: 'text-green-600',
+    },
+    {
+      icon: Calendar,
+      title: language === 'ar' ? 'تجديد الرخصة' : 'License Renewal',
+      description: language === 'ar' ? 'خدمة تجديد رخصة القيادة بكل سهولة' : 'Easy driving license renewal service',
+      color: 'text-purple-600',
+    },
+    {
+      icon: FileCheck,
+      title: language === 'ar' ? 'استخراج شهادة ولادة' : 'Birth Certificate',
+      description: language === 'ar' ? 'استخراج شهادة ولادة بسرعة وكفاءة' : 'Fast and efficient birth certificate extraction',
+      color: 'text-red-600',
+    },
+    {
+      icon: Stamp,
+      title: language === 'ar' ? 'تصديقات رسمية' : 'Official Certifications',
+      description: language === 'ar' ? 'تصديقات رسمية لجميع أنواع الوثائق' : 'Official certifications for all document types',
+      color: 'text-yellow-600',
+    },
+    {
+      icon: FileText,
+      title: language === 'ar' ? 'استخراج وثائق' : 'Document Extraction',
+      description: language === 'ar' ? 'استخراج جميع أنواع الوثائق الرسمية' : 'Extraction of all official documents',
+      color: 'text-cyan-600',
+    },
+    {
+      icon: Award,
+      title: language === 'ar' ? 'خدمات الأحوال المدنية' : 'Civil Affairs Services',
+      description: language === 'ar' ? 'خدمات الأحوال المدنية الشاملة' : 'Comprehensive civil affairs services',
+      color: 'text-indigo-600',
+    },
+    {
+      icon: Zap,
+      title: language === 'ar' ? 'خدمات الجوازات' : 'Passport Services',
+      description: language === 'ar' ? 'خدمات الجوازات السريعة والمتكاملة' : 'Fast and complete passport services',
+      color: 'text-rose-600',
+    },
+  ];
+
+  // New services (commercial registry services)
+  const newServices = [
     {
       icon: Building2,
       title: language === 'ar' ? 'قيد سجل تجاري' : 'Commercial Registration',
@@ -75,6 +128,9 @@ export default function Home() {
       color: 'text-rose-600',
     },
   ];
+
+  // Combine all services
+  const services = [...newServices, ...oldServices];
 
   const features = [
     {
@@ -206,8 +262,8 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('servicesTitle')}</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 {language === 'ar' 
-                  ? 'نقدم مجموعة شاملة من خدمات السجل التجاري والتراخيص'
-                  : 'We offer a comprehensive range of commercial registration and licensing services'}
+                  ? 'نقدم مجموعة شاملة من خدمات تعقيب المعاملات الحكومية والسجل التجاري'
+                  : 'We offer a comprehensive range of government transaction and commercial registration services'}
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
