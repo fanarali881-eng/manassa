@@ -13,9 +13,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <div className="flex items-center space-x-2 rtl:space-x-reverse mb-4">
-              <img src="/logo.png" alt="Salamat Logo" className="h-12 w-12" />
-              <span className="text-xl font-bold">Salamat Vichel Safety inspection</span>
+            <div className="flex items-center gap-3 rtl:gap-3 mb-4">
+              <img src="/logo.png" alt="برق" className="h-12 w-auto" />
+              <span className="text-xl font-bold">{language === 'ar' ? 'برق للخدمات العامة وتعقيب المعاملات الحكومية' : 'Barq for Public Services and Government Transaction Processing'}</span>
             </div>
             <p className="text-sm text-muted-foreground">
               {t('aboutUsDesc')}
