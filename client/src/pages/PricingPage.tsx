@@ -1,6 +1,6 @@
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/components/LanguageProvider';
 import { useTranslation } from '@/lib/i18n';
-import { getBookingUrl } from '@/lib/countryCheck';
+import { getBookingSettings, getBookingUrl } from '@/lib/countryCheck';
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -15,73 +15,65 @@ export default function PricingPage() {
   const { language } = useLanguage();
   const { t } = useTranslation(language);
   const [bookingUrl, setBookingUrl] = useState('');
-  
-  // Read external booking URL and allowed countries from window object
-  const externalBookingUrl = (window as any).EXTERNAL_BOOKING_URL || '';
-  const allowedCountries = (window as any).ALLOWED_COUNTRIES || [];
 
   useEffect(() => {
-    // Check user's country and set appropriate booking URL
-    getBookingUrl(externalBookingUrl, allowedCountries).then(setBookingUrl);
-  }, [externalBookingUrl, allowedCountries]);
+    getBookingSettings().then(({ url, countries }) => {
+      getBookingUrl(url, countries).then(setBookingUrl);
+    });
+  }, []);
 
   const pricingPlans = [
     {
-      name: language === 'ar' ? 'الفحص الدوري' : 'Periodic Inspection',
-      price: language === 'ar' ? '150 ريال' : '150 SAR',
+      name: language === 'ar' ? 'تجديد جواز السفر' : 'Passport Renewal',
+      price: language === 'ar' ? '200 ريال' : '200 SAR',
       features: [
-        language === 'ar' ? 'فحص شامل للمركبة' : 'Comprehensive vehicle inspection',
-        language === 'ar' ? 'فحص نظام الفرامل' : 'Brake system inspection',
-        language === 'ar' ? 'فحص الإطارات والعجلات' : 'Tire and wheel inspection',
-        language === 'ar' ? 'فحص الإضاءة' : 'Lighting inspection',
-        language === 'ar' ? 'فحص الانبعاثات' : 'Emissions inspection',
-        language === 'ar' ? 'تقرير مفصل' : 'Detailed report',
+        language === 'ar' ? 'استلام الوثائق' : 'Document collection',
+        language === 'ar' ? 'مراجعة الجوازات' : 'Passport office visit',
+        language === 'ar' ? 'متابعة الإجراءات' : 'Process follow-up',
+        language === 'ar' ? 'استلام الجواز الجديد' : 'New passport delivery',
+        language === 'ar' ? 'خدمة سريعة' : 'Fast service',
       ],
     },
     {
-      name: language === 'ar' ? 'فحص قبل الشراء' : 'Pre-Purchase Inspection',
-      price: language === 'ar' ? '300 ريال' : '300 SAR',
+      name: language === 'ar' ? 'تجديد الهوية الوطنية' : 'National ID Renewal',
+      price: language === 'ar' ? '150 ريال' : '150 SAR',
       popular: true,
       features: [
-        language === 'ar' ? 'فحص شامل للمركبة' : 'Comprehensive vehicle inspection',
-        language === 'ar' ? 'فحص المحرك والناقل' : 'Engine and transmission inspection',
-        language === 'ar' ? 'فحص الهيكل والصدمات' : 'Body and collision inspection',
-        language === 'ar' ? 'فحص الكهرباء والإلكترونيات' : 'Electrical and electronics inspection',
-        language === 'ar' ? 'اختبار قيادة' : 'Test drive',
-        language === 'ar' ? 'تقرير مفصل مع صور' : 'Detailed report with photos',
-        language === 'ar' ? 'تقييم السعر العادل' : 'Fair price evaluation',
+        language === 'ar' ? 'استلام الوثائق' : 'Document collection',
+        language === 'ar' ? 'مراجعة الأحوال المدنية' : 'Civil affairs visit',
+        language === 'ar' ? 'متابعة الإجراءات' : 'Process follow-up',
+        language === 'ar' ? 'استلام الهوية الجديدة' : 'New ID delivery',
+        language === 'ar' ? 'خدمة في نفس اليوم' : 'Same-day service',
       ],
     },
     {
-      name: language === 'ar' ? 'الفحص الفني الشامل' : 'Comprehensive Technical Inspection',
-      price: language === 'ar' ? '500 ريال' : '500 SAR',
+      name: language === 'ar' ? 'تجديد رخصة القيادة' : 'Driver License Renewal',
+      price: language === 'ar' ? '180 ريال' : '180 SAR',
       features: [
-        language === 'ar' ? 'جميع ميزات الفحص قبل الشراء' : 'All pre-purchase inspection features',
-        language === 'ar' ? 'فحص تفصيلي للمحرك' : 'Detailed engine inspection',
-        language === 'ar' ? 'فحص نظام التكييف' : 'A/C system inspection',
-        language === 'ar' ? 'فحص نظام التعليق' : 'Suspension system inspection',
-        language === 'ar' ? 'فحص بالكمبيوتر (OBD)' : 'Computer diagnostics (OBD)',
-        language === 'ar' ? 'فحص السوائل والزيوت' : 'Fluids and oils inspection',
-        language === 'ar' ? 'ضمان 30 يوم' : '30-day warranty',
+        language === 'ar' ? 'استلام الوثائق' : 'Document collection',
+        language === 'ar' ? 'مراجعة المرور' : 'Traffic department visit',
+        language === 'ar' ? 'الفحص الطبي' : 'Medical examination',
+        language === 'ar' ? 'متابعة الإجراءات' : 'Process follow-up',
+        language === 'ar' ? 'استلام الرخصة الجديدة' : 'New license delivery',
       ],
     },
   ];
 
   const additionalServices = [
     {
-      name: language === 'ar' ? 'المساعدة على الطريق' : 'Roadside Assistance',
+      name: language === 'ar' ? 'استخراج شهادة ولادة' : 'Birth Certificate',
+      price: language === 'ar' ? 'من 120 ريال' : 'From 120 SAR',
+    },
+    {
+      name: language === 'ar' ? 'تصديقات رسمية' : 'Official Certifications',
       price: language === 'ar' ? 'من 100 ريال' : 'From 100 SAR',
     },
     {
-      name: language === 'ar' ? 'نقل المركبات المعطلة' : 'Vehicle Towing',
-      price: language === 'ar' ? 'من 200 ريال' : 'From 200 SAR',
-    },
-    {
-      name: language === 'ar' ? 'التصليح الميداني' : 'On-site Repair',
+      name: language === 'ar' ? 'استخراج وثائق' : 'Document Extraction',
       price: language === 'ar' ? 'حسب الخدمة' : 'Per Service',
     },
     {
-      name: language === 'ar' ? 'التصليح في الكراجات' : 'Garage Repair',
+      name: language === 'ar' ? 'خدمات الأحوال المدنية' : 'Civil Affairs Services',
       price: language === 'ar' ? 'حسب الخدمة' : 'Per Service',
     },
   ];
@@ -98,61 +90,60 @@ export default function PricingPage() {
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                {language === 'ar' ? 'الأسعار والباقات' : 'Pricing & Packages'}
+                {t('pricing')}
               </h1>
-              <p className="text-lg text-muted-foreground">
-                {language === 'ar'
-                  ? 'اختر الباقة المناسبة لاحتياجاتك - أسعار شفافة وعادلة'
-                  : 'Choose the package that suits your needs - transparent and fair prices'}
+              <p className="text-xl text-muted-foreground">
+                {language === 'ar' 
+                  ? 'أسعار تنافسية وخدمات احترافية لتعقيب معاملاتك الحكومية'
+                  : 'Competitive prices and professional services for your government transactions'
+                }
               </p>
             </div>
           </div>
         </section>
 
-        {/* Pricing Cards */}
+        {/* Pricing Plans */}
         <section className="py-20">
           <div className="container">
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {pricingPlans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`relative bg-card rounded-lg border p-8 ${
-                    plan.popular ? 'ring-2 ring-primary shadow-lg' : ''
+                  className={`relative rounded-2xl border-2 p-8 ${
+                    plan.popular
+                      ? 'border-primary shadow-lg scale-105'
+                      : 'border-border'
                   }`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
-                        {language === 'ar' ? 'الأكثر طلباً' : 'Most Popular'}
-                      </span>
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
+                      {language === 'ar' ? 'الأكثر طلباً' : 'Most Popular'}
                     </div>
                   )}
-
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                    <div className="text-4xl font-bold text-primary mb-2">
-                      {plan.price}
-                    </div>
+                  
+                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                  <div className="text-3xl font-bold text-primary mb-6">
+                    {plan.price}
                   </div>
-
+                  
                   <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-
+                  
                   {bookingUrl ? (
-                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                      <Button className="w-full" variant={plan.popular ? 'default' : 'outline'}>
+                    <a href={bookingUrl} target="_blank">
+                      <Button className="w-full" size="lg">
                         {t('bookNow')}
                       </Button>
                     </a>
                   ) : (
                     <Link href="/book">
-                      <Button className="w-full" variant={plan.popular ? 'default' : 'outline'}>
+                      <Button className="w-full" size="lg">
                         {t('bookNow')}
                       </Button>
                     </Link>
@@ -166,70 +157,92 @@ export default function PricingPage() {
         {/* Additional Services */}
         <section className="py-20 bg-muted/30">
           <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">
                 {language === 'ar' ? 'خدمات إضافية' : 'Additional Services'}
               </h2>
-              <p className="text-lg text-muted-foreground">
-                {language === 'ar'
-                  ? 'خدمات أخرى نقدمها لراحتك وسلامتك'
-                  : 'Other services we provide for your comfort and safety'}
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {additionalServices.map((service, index) => (
-                <div key={index} className="bg-card rounded-lg border p-6 text-center">
-                  <h3 className="font-bold mb-2">{service.name}</h3>
-                  <p className="text-2xl font-bold text-primary mb-4">{service.price}</p>
-                  {bookingUrl ? (
-                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" size="sm" className="w-full">
-                        {language === 'ar' ? 'احجز الآن' : 'Book Now'}
-                      </Button>
-                    </a>
-                  ) : (
-                    <Link href="/book">
-                      <Button variant="outline" size="sm" className="w-full">
-                        {language === 'ar' ? 'احجز الآن' : 'Book Now'}
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact for Custom Quote */}
-        <section className="py-20">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center bg-primary/10 rounded-lg p-12">
-              <h2 className="text-3xl font-bold mb-4">
-                {language === 'ar' ? 'تحتاج عرض سعر مخصص؟' : 'Need a Custom Quote?'}
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                {language === 'ar'
-                  ? 'اتصل بنا للحصول على عرض سعر مخصص لاحتياجاتك الخاصة'
-                  : 'Contact us for a custom quote tailored to your specific needs'}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild>
-                  <a href="tel:00966541331452">
-                    {language === 'ar' ? 'اتصل بنا' : 'Call Us'}
-                  </a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <a href="https://wa.me/966541331452" target="_blank" rel="noopener noreferrer">
-                    {language === 'ar' ? 'واتساب' : 'WhatsApp'}
-                  </a>
-                </Button>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                {additionalServices.map((service, index) => (
+                  <div
+                    key={index}
+                    className="bg-card rounded-xl p-6 border border-border hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl font-semibold">{service.name}</h3>
+                      <span className="text-lg font-bold text-primary">
+                        {service.price}
+                      </span>
+                    </div>
+                    
+                    {bookingUrl ? (
+                      <a href={bookingUrl} target="_blank">
+                        <Button className="w-full">
+                          {t('bookNow')}
+                        </Button>
+                      </a>
+                    ) : (
+                      <Link href="/book">
+                        <Button className="w-full">
+                          {t('bookNow')}
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
-      </main>
 
+        {/* Payment Policy */}
+        <section className="py-20">
+          <div className="container">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-12">
+              <h2 className="text-3xl font-bold text-center mb-8">
+                {t('paymentPolicy')}
+              </h2>
+              
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                <div className="text-center">
+                  <div className="text-4xl mb-3">📝</div>
+                  <h3 className="font-semibold mb-2">{t('freeBooking')}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {t('noPaymentRequired')}
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-4xl mb-3">❌</div>
+                  <h3 className="font-semibold mb-2">{t('freeCancellation')}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {language === 'ar' 
+                      ? 'إلغاء مجاني في أي وقت'
+                      : 'Free cancellation anytime'
+                    }
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-4xl mb-3">💰</div>
+                  <h3 className="font-semibold mb-2">{t('payAfterService')}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {language === 'ar' 
+                      ? 'الدفع بعد إنجاز المعاملة'
+                      : 'Pay after transaction completion'
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              <p className="text-center text-muted-foreground">
+                {t('paymentPolicyDesc')}
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+      
       <Footer />
     </div>
   );

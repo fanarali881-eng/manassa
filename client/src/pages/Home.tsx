@@ -9,7 +9,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useTranslation } from '@/lib/i18n';
 import { getBookingUrl, getBookingSettings } from '@/lib/countryCheck';
 import { useState, useEffect } from 'react';
-import { Ambulance, Calendar, CheckCircle, ClipboardCheck, MapPin, Shield, Sparkles, Truck, Users, Wrench, Zap } from 'lucide-react';
+import { FileText, Calendar, CheckCircle, ClipboardCheck, MapPin, Shield, Sparkles, Stamp, Users, Zap, FileCheck, Award } from 'lucide-react';
 import { Link } from 'wouter';
 
 
@@ -27,7 +27,7 @@ export default function Home() {
 
   const services = [
     {
-      icon: Calendar,
+      icon: FileText,
       title: t('periodicInspection'),
       description: t('periodicInspectionDesc'),
       color: 'text-blue-600',
@@ -39,51 +39,51 @@ export default function Home() {
       color: 'text-green-600',
     },
     {
-      icon: Wrench,
-      title: t('technicalInspection'),
-      description: language === 'ar' ? 'فحص فني شامل لجميع أجزاء المركبة' : 'Comprehensive technical inspection of all vehicle parts',
+      icon: Calendar,
+      title: t('roadsideInspection'),
+      description: t('roadsideInspectionDesc'),
       color: 'text-purple-600',
     },
     {
-      icon: Ambulance,
+      icon: FileCheck,
       title: t('roadsideAssistance'),
-      description: language === 'ar' ? 'مساعدة فورية على الطريق في حالات الطوارئ' : 'Immediate roadside assistance in emergencies',
+      description: language === 'ar' ? 'استخراج شهادة ولادة بسرعة وكفاءة' : 'Fast and efficient birth certificate extraction',
       color: 'text-red-600',
     },
     {
-      icon: Truck,
+      icon: Stamp,
       title: t('vehicleTowing'),
-      description: language === 'ar' ? 'نقل المركبات المعطلة بأمان إلى الوجهة المطلوبة' : 'Safe towing of broken vehicles to desired destination',
+      description: language === 'ar' ? 'تصديقات رسمية لجميع أنواع الوثائق' : 'Official certifications for all document types',
       color: 'text-yellow-600',
     },
     {
-      icon: Zap,
+      icon: FileText,
       title: t('onSiteRepair'),
-      description: language === 'ar' ? 'تصليح سريع في موقعك دون الحاجة للتوجه للكراج' : 'Quick repair at your location without going to garage',
+      description: language === 'ar' ? 'استخراج جميع أنواع الوثائق الرسمية' : 'Extraction of all official documents',
       color: 'text-cyan-600',
     },
     {
-      icon: Wrench,
+      icon: Award,
       title: t('garageRepair'),
-      description: language === 'ar' ? 'تصليح شامل في كراجاتنا المجهزة بأحدث المعدات' : 'Comprehensive repair in our garages equipped with latest tools',
+      description: language === 'ar' ? 'خدمات الأحوال المدنية الشاملة' : 'Comprehensive civil affairs services',
       color: 'text-indigo-600',
     },
     {
       icon: Zap,
-      title: t('emergencyService'),
-      description: language === 'ar' ? 'خدمة طوارئ سريعة متاحة 24/7 للحالات العاجلة' : 'Fast emergency service available 24/7 for urgent cases',
+      title: t('technicalInspection'),
+      description: language === 'ar' ? 'خدمات الجوازات السريعة والمتكاملة' : 'Fast and complete passport services',
       color: 'text-rose-600',
     },
   ];
 
   const features = [
     {
-      icon: Shield,
+      icon: Zap,
       title: t('vehicleSafety'),
       description: t('vehicleSafetyDesc'),
     },
     {
-      icon: Sparkles,
+      icon: Shield,
       title: t('environmentalProtection'),
       description: t('environmentalProtectionDesc'),
     },
@@ -100,9 +100,9 @@ export default function Home() {
   ];
 
   const stats = [
-    { value: '150+', label: t('stationsCount') },
-    { value: '500+', label: t('engineersCount') },
-    { value: '15+', label: t('experienceYears') },
+    { value: '5000+', label: t('stationsCount') },
+    { value: '50+', label: t('engineersCount') },
+    { value: '10+', label: t('experienceYears') },
   ];
 
   const steps = [
@@ -138,7 +138,7 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative py-20 md:py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-green-500/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-primary/5" />
           <div className="container relative z-10">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
@@ -166,9 +166,9 @@ export default function Home() {
               </div>
               <div className="relative">
                 <img
-                  src="/images/hero-inspection-new.png"
-                  alt="Car Inspection Station"
-                  className="w-full h-auto object-cover"
+                  src="/images/barq-logo.png"
+                  alt="Barq Government Services"
+                  className="w-full h-auto object-contain max-w-md mx-auto"
                 />
               </div>
             </div>
@@ -194,6 +194,12 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('servicesTitle')}</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'ar' 
+                  ? 'نقدم مجموعة شاملة من خدمات تعقيب المعاملات الحكومية بكل احترافية وسرعة'
+                  : 'We provide a comprehensive range of government transaction services with professionalism and speed'
+                }
+              </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {services.map((service, index) => (
@@ -211,23 +217,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Map Section */}
-        <section className="py-20">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{language === 'ar' ? 'مواقع الفحص الفني الدوري' : 'Periodic Inspection Locations'}</h2>
-            </div>
-            <div className="flex justify-center">
-              <img src="/images/map-saudi.png" alt="Saudi Arabia Map" className="w-full max-w-4xl rounded-lg shadow-lg" />
-            </div>
-          </div>
-        </section>
-
         {/* Why Choose Us Section */}
         <section id="about" className="py-20 bg-muted/50">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('whyTitle')}</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'ar' 
+                  ? 'نتميز بالسرعة والاحترافية في إنجاز معاملاتك الحكومية'
+                  : 'We excel in speed and professionalism in completing your government transactions'
+                }
+              </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature, index) => (
@@ -248,134 +248,61 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('howItWorksTitle')}</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'ar' 
+                  ? 'خطوات بسيطة لإنجاز معاملتك'
+                  : 'Simple steps to complete your transaction'
+                }
+              </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {steps.map((step, index) => (
-                <div key={index} className="relative">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mb-4">
-                      {step.number}
-                    </div>
-                    <h3 className="font-semibold mb-2">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                <div key={index} className="text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground text-2xl font-bold mb-4">
+                    {step.number}
                   </div>
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-8 start-full w-full h-0.5 bg-border" style={{ width: 'calc(100% - 4rem)' }} />
-                  )}
+                  <h3 className="font-semibold mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground">{step.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Payment Policy Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
+        {/* CTA Section */}
+        <section className="py-20 bg-gradient-to-br from-primary/10 to-primary/5">
           <div className="container">
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    {t('paymentPolicy')}
-                  </h2>
-                  <p className="text-lg text-gray-600">
-                    {t('paymentPolicyDesc')}
-                  </p>
-                </div>
-                
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="text-center p-6 bg-green-50 rounded-xl">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {t('freeBooking')}
-                    </h3>
-                    <p className="text-gray-600">
-                      {t('noPaymentRequired')}
-                    </p>
-                  </div>
-                  
-                  <div className="text-center p-6 bg-blue-50 rounded-xl">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {t('freeCancellation')}
-                    </h3>
-                    <p className="text-gray-600">
-                      {language === 'ar' ? 'إلغِ حجزك في أي وقت بدون أي رسوم' : 'Cancel your booking anytime without any fees'}
-                    </p>
-                  </div>
-                  
-                  <div className="text-center p-6 bg-teal-50 rounded-xl">
-                    <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {t('payAfterService')}
-                    </h3>
-                    <p className="text-gray-600">
-                      {language === 'ar' ? 'ادفع فقط بعد رضاك التام' : 'Pay only after your complete satisfaction'}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="mt-8 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-2 border-yellow-200">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
-                        {t('qualityGuarantee')}
-                      </h3>
-                      <p className="text-gray-700">
-                        {t('qualityGuaranteeDesc')}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                {language === 'ar' 
+                  ? 'جاهز لإنجاز معاملتك؟'
+                  : 'Ready to complete your transaction?'
+                }
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                {language === 'ar' 
+                  ? 'قدم طلبك الآن ودع فريقنا المحترف يتولى الأمر'
+                  : 'Submit your request now and let our professional team handle it'
+                }
+              </p>
+              {bookingUrl ? (
+                <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                  <Button size="lg">
+                    {t('bookNow')}
+                  </Button>
+                </a>
+              ) : (
+                <Link href="/book">
+                  <Button size="lg">
+                    {t('bookNow')}
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </section>
-
-        {/* CTA Section */}
-        <section id="contact" className="py-20 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
-          <div className="container text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {language === 'ar' ? 'جاهز لفحص مركبتك؟' : 'Ready to Inspect Your Vehicle?'}
-            </h2>
-            <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-              {language === 'ar' 
-                ? 'احجز موعدك الآن واحصل على فحص شامل لمركبتك من قبل فريق محترف'
-                : 'Book your appointment now and get a comprehensive inspection by our professional team'}
-            </p>
-            {bookingUrl ? (
-              <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="secondary" className="text-lg px-8">
-                  {t('bookNow')}
-                </Button>
-              </a>
-            ) : (
-              <Link href="/book">
-                <Button size="lg" variant="secondary" className="text-lg px-8">
-                  {t('bookNow')}
-                </Button>
-              </Link>
-            )}
-          </div>
-        </section>
       </main>
-
+      
       <Footer />
     </div>
   );

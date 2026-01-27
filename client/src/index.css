@@ -43,16 +43,16 @@
 }
 
 :root {
-  /* Custom colors matching reference design */
-  --salamat-blue: oklch(0.45 0.12 240); /* Dark blue */
-  --salamat-green: oklch(0.50 0.15 160); /* Dark green */
+  /* Custom colors for Barq branding */
+  --barq-navy: oklch(0.35 0.10 240); /* Deep navy blue */
+  --barq-gold: oklch(0.60 0.15 50); /* Gold */
   
-  --primary: var(--salamat-green);
+  --primary: var(--barq-navy);
   --primary-foreground: oklch(1 0 0);
-  --sidebar-primary: var(--salamat-green);
+  --sidebar-primary: var(--barq-navy);
   --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--salamat-green);
-  --chart-2: var(--salamat-blue);
+  --chart-1: var(--barq-navy);
+  --chart-2: var(--barq-gold);
   --chart-3: oklch(0.4 0.12 240);
   --chart-4: oklch(0.35 0.12 240);
   --chart-5: oklch(0.3 0.12 240);
@@ -83,9 +83,9 @@
 }
 
 .dark {
-  --primary: var(--salamat-green);
+  --primary: var(--barq-navy);
   --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--salamat-green);
+  --sidebar-primary: var(--barq-navy);
   --sidebar-primary-foreground: var(--color-blue-50);
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.85 0.005 65);
@@ -104,8 +104,8 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--salamat-green);
-  --chart-2: var(--salamat-blue);
+  --chart-1: var(--barq-navy);
+  --chart-2: var(--barq-gold);
   --chart-3: oklch(0.4 0.12 240);
   --chart-4: oklch(0.35 0.12 240);
   --chart-5: oklch(0.3 0.12 240);
