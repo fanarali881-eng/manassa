@@ -365,7 +365,7 @@ export default function BookingPage() {
 
                 {/* Appointment Details */}
                 <div className="space-y-4">
-                  <h3 className="font-semibold">{t('appointmentDetails')}</h3>
+                  <h3 className="font-semibold">{language === 'ar' ? 'التاريخ والوقت المفضل للتواصل' : 'Preferred Contact Date and Time'}</h3>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="preferredDate">{t('preferredDate')} *</Label>
