@@ -305,9 +305,9 @@ export default function BookingPage() {
                     <SelectTrigger>
                       <SelectValue placeholder={language === 'ar' ? 'اختر نوع الخدمة' : 'Select service type'} />
                     </SelectTrigger>
-                    <SelectContent className="text-right">
+                    <SelectContent align="end" className="text-right">
                       {allServices.map((service) => (
-                        <SelectItem key={service.value} value={service.value} className="text-right">
+                        <SelectItem key={service.value} value={service.value} className="text-right justify-end">
                           {language === 'ar' ? service.ar : service.en}
                         </SelectItem>
                       ))}
